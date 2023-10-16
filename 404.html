@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!--Lazy ass hack for the server-side 404 page-->
   <script>
-    var path404 = `${window.location.pathname}?${window.location.search}`;
-    window.location.replace(`${window.location.origin}/#/${path404}`);
+    var path404 = window.location.pathname;
+    if (window.location.search) {
+      path404 += `?${window.location.search}`;
+    }
+
+    window.location.replace(`${window.location.origin}/#${path404}`);
   </script>
 </html>
