@@ -1,0 +1,23 @@
+# .github/workflows/deploy.yml
+name: Deploy changes to main branch onto live site
+run-name: Site deploy for changes pushed to master by ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: deploy-${{ github.ref }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy Site
+        run: |
+          gh-pages -d build
